@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div id="Main">
+
+        <div id="Header">
+            <h1>Library</h1>
+        </div>
+
+        <div id="Cards">
+            
+            <div>
+               <form>
+                <input type="text" class="input" id="inputTitle" placeholder="Title" required maxlength="100">
+                <input type="text" class="input" id="inputAuthor" placeholder="Author" required maxlength="100">
+                <input type="number" class="input" id="inputPages" placeholder="How many pages?" required maxlength="10000">
+                <div class="isRead">
+                    <label for="isRead">Have you read it?</label>
+                    <input class="checkbox" type="checkbox" id="isRead">
+                </div>
+                <button type="submit">Submit</button>
+
+            </form>
+            </div>
+
+            <button id="addBookBtn">Add Book</button>
+        </div> 
+
+    </div>
+</body>
+</html>
