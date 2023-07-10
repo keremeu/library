@@ -8,31 +8,32 @@
     <script defer src="script.js"></script>
 </head>
 <body>
-    <div id="Main">
-
-        <div id="Header">
-            <h1>Library</h1>
-        </div>
-
-        <div id="Cards">
-            
-            <div>
-               <form>
-                <input type="text" class="input" id="inputTitle" placeholder="Title" required maxlength="100">
-                <input type="text" class="input" id="inputAuthor" placeholder="Author" required maxlength="100">
-                <input type="number" class="input" id="inputPages" placeholder="How many pages?" required maxlength="10000">
-                <div class="isRead">
-                    <label for="isRead">Have you read it?</label>
-                    <input class="checkbox" type="checkbox" id="isRead">
-                </div>
-                <button type="submit">Submit</button>
-
-            </form>
-            </div>
-
-            <button id="addBookBtn">Add Book</button>
-        </div> 
-
+    
+    <div id="Header">
+        <h1>Library</h1>
     </div>
+
+    <div id="Main">
+        <div id="Cards">
+           <button id="addBookBtn">Add Book</button>
+        </div> 
+    </div>
+
+    <div id="overlay" class="overlay">
+        <div id="addBookModal" class="addBookModal">
+            <form id="addBookForm">
+            <input type="text" class="input" id="inputTitle" placeholder="Title" maxlength="100">
+            <input type="text" class="input" id="inputAuthor" placeholder="Author" maxlength="100">
+            <input type="number" class="input" id="inputPages" placeholder="How many pages?" maxlength="10000">
+            <div class="isRead">
+                <label for="isRead">Have you read it?</label>
+                <input class="checkbox" type="checkbox" id="isRead">
+            </div>
+            <button id="submitBtn" type="submit">Submit</button>
+
+        </form>
+        </div>  
+    </div>
+
 </body>
 </html>

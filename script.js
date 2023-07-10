@@ -1,9 +1,39 @@
+// Data Structures
+
+class Book {
+    constructor(
+      title = 'Unknown',
+      author = 'Unknown',
+      pages = '0',
+      isRead = false
+    ) {
+      this.title = title
+      this.author = author
+      this.pages = pages
+      this.isRead = isRead
+    }
+  }
+
+  class Library {
+    constructor() {
+      this.books = []
+    }
+  
+    addBook(newBook) {
+        this.books.push(newBook)
+    }
+  }
+  
+  const library = new Library()
+
+// Interface
 const Cards = document.getElementById("Cards")
 const addBookBtn = document.getElementById("addBookBtn")
+const overlay = document.getElementById("overlay")
+const addBookForm = document.getElementById("addBookForm")
 
-addBookBtn.onclick = addNewBook
 
-function addNewBook() {
+function createBookCard(book) {
     const bookCard = document.createElement("div")
     const title = document.createElement("p")
     const author = document.createElement("p")
@@ -20,9 +50,9 @@ function addNewBook() {
     readBtn.setAttribute("id", "readBtn")
     removeBtn.setAttribute("id", "removeBtn")
 
-    title.textContent = "Title:"
-    author.textContent = "Author:"
-    pages.textContent = "Pages:"
+    title.textContent = `Title: ${book.title}`
+    author.textContent = `Author: ${book.author}`
+    pages.textContent = `Page: ${book.pages}`
     readBtn.textContent = "READ"
     removeBtn.textContent = "Remove"
     
@@ -33,7 +63,55 @@ function addNewBook() {
     cardBtns.appendChild(readBtn)
     cardBtns.appendChild(removeBtn)
     Cards.prepend(bookCard)
-
-
-
 }
+function createAddBookBtn () {
+    const addBookBtn = document.createElement("button")
+    addBookBtn.setAttribute("id", "addBookBtn")
+    addBookBtn.textContent = "Add Book"
+    Cards.appendChild(addBookBtn)
+    addBookBtn.onclick = openNewBookForm
+}
+
+function openNewBookForm() {
+    overlay.style.display = "block"
+}
+
+function closeNewBookForm(e) {
+    if (e.target == overlay) {
+        overlay.style.display = "none"
+    }
+}
+
+
+const getBookFromInput = () => {
+    const title = document.getElementById("inputTitle").value
+    const author = document.getElementById("inputAuthor").value
+    const pages = document.getElementById("inputPages").value
+    const isRead = document.getElementById("isRead").checked
+    return new Book(title, author, pages, isRead)
+}
+
+const addBook = (e) => {
+    e.preventDefault()
+    const newBook = getBookFromInput()
+    library.addBook(newBook)
+    updateCards()
+    overlay.style.display = "none"
+}
+
+const resetCards = () => {
+    Cards.innerHTML = ""
+}
+
+const updateCards = () => {
+    resetCards ()
+    createAddBookBtn()
+    for (let book of library.books) {
+        createBookCard(book)
+    }
+}
+
+addBookBtn.onclick = openNewBookForm
+window.onclick = closeNewBookForm
+addBookForm.onsubmit = addBook
+ 
