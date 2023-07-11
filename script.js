@@ -50,11 +50,19 @@ function createBookCard(book) {
     readBtn.setAttribute("id", "readBtn")
     removeBtn.setAttribute("id", "removeBtn")
 
+    if (book.isRead) {
+        readBtn.textContent = "Read"
+        readBtn.style.backgroundColor = "lightgreen"
+    } else {
+        readBtn.textContent = "Not Read"
+        readBtn.style.backgroundColor = "red"
+    }
+
     title.textContent = `Title: ${book.title}`
     author.textContent = `Author: ${book.author}`
     pages.textContent = `Page: ${book.pages}`
-    readBtn.textContent = "READ"
     removeBtn.textContent = "Remove"
+    readBtn.onclick = toggleIsRead
     
     bookCard.appendChild(title)
     bookCard.appendChild(author)
@@ -64,6 +72,7 @@ function createBookCard(book) {
     cardBtns.appendChild(removeBtn)
     Cards.prepend(bookCard)
 }
+
 function createAddBookBtn () {
     const addBookBtn = document.createElement("button")
     addBookBtn.setAttribute("id", "addBookBtn")
@@ -81,7 +90,6 @@ function closeNewBookForm(e) {
         overlay.style.display = "none"
     }
 }
-
 
 const getBookFromInput = () => {
     const title = document.getElementById("inputTitle").value
@@ -108,6 +116,16 @@ const updateCards = () => {
     createAddBookBtn()
     for (let book of library.books) {
         createBookCard(book)
+    }
+}
+
+const toggleIsRead = (e) => {
+    if (e.target.textContent == "Read") {
+        e.target.textContent = "Not Read"
+        e.target.style.backgroundColor = "red"
+    } else {
+        e.target.textContent = "Read"
+        e.target.style.backgroundColor = "lightgreen"
     }
 }
 
