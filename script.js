@@ -22,6 +22,10 @@ class Book {
     addBook(newBook) {
         this.books.push(newBook)
     }
+
+    removeBook(title) {
+        this.books = this.books.filter((book) => book.title !== title)
+      }
   }
   
   const library = new Library()
@@ -63,6 +67,7 @@ function createBookCard(book) {
     pages.textContent = `Page: ${book.pages}`
     removeBtn.textContent = "Remove"
     readBtn.onclick = toggleIsRead
+    removeBtn.onclick = removeBook 
     
     bookCard.appendChild(title)
     bookCard.appendChild(author)
@@ -112,7 +117,7 @@ const resetCards = () => {
 }
 
 const updateCards = () => {
-    resetCards ()
+    resetCards()
     createAddBookBtn()
     for (let book of library.books) {
         createBookCard(book)
@@ -127,6 +132,15 @@ const toggleIsRead = (e) => {
         e.target.textContent = "Read"
         e.target.style.backgroundColor = "lightgreen"
     }
+}
+
+const removeBook = (e) => {
+    const title = e.target.parentNode.parentNode.firstChild.innerHTML.replaceAll(
+        "Title: ",
+        ''
+      )
+    library.removeBook(title)
+    updateCards()
 }
 
 addBookBtn.onclick = openNewBookForm
